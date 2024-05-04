@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Men's Shoes</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  h1 {
+    text-align: center;
+    margin-top: 50px;
+  }
+  .dropdown {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .dropdown select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  .product {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .product-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Men's Shoes</h1>
+  </header>
+  <div class="container">
+    <div class="dropdown">
+      <select onchange="location = this.value;">
+        <option value="">Select Category</option>
+        <option value="index.html">Home</option>
+        <option value="womens.html">Women's Shoes</option>
+        <option value="kids.html">Kids' Shoes</option>
+        <option value="cart.html">Shopping Cart</option>
+        <option value="signup.html">Sign Up</option>
+      </select>
+    </div>
+    <div class="product">
+      <div class="product-card">
+        <img src="C:\Users\abbaz\OneDrive\Documents\CSC 456\csc 456 project\men shoe 1.jpeg" alt="Men's Shoe 1">
+        <h3>Men's Shoe 1</h3>
+        <p>$50</p>
+        <button onclick="addToCart('Men\'s Shoe 1', 50)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="C:\Users\abbaz\OneDrive\Documents\CSC 456\csc 456 project\men shoe 2.jpeg" alt="Men's Shoe 2">
+        <h3>Men's Shoe 2</h3>
+        <p>$60</p>
+        <button onclick="addToCart('Men\'s Shoe 2', 60)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="C:\Users\abbaz\OneDrive\Documents\CSC 456\csc 456 project\men shoe 3.jpeg" alt="Men's Shoe 3">
+        <h3>Men's Shoe 2</h3>
+        <p>$70</p>
+        <button onclick="addToCart('Men\'s Shoe 3', 70)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function addToCart(name, price) {
+      let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      cartItems.push({ name: name, price: price });
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+  </script>
+</body>
+</html>

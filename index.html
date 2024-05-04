@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shoe Shop</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    background-color: #444;
+    padding: 10px 0;
+  }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin: 0 10px;
+    border-radius: 5px;
+  }
+  nav a:hover {
+    background-color: #555;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex; /* Added */
+    flex-wrap: wrap; /* Added */
+  }
+  .main-image {
+    flex: 1; /* Added */
+    max-width: 50%; /* Added */
+    text-align: center;
+    margin-top: 50px;
+  }
+  .main-image img {
+    width: 100%; /* Added */
+    height: auto; /* Added */
+  }
+  .content {
+    flex: 1; /* Added */
+    max-width: 50%; /* Added */
+    padding-left: 20px; /* Added for spacing */
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Shoe Shop</h1>
+  </header>
+  <nav>
+    <a href="mens.html">Men's Shoes</a>
+    <a href="womens.html">Women's Shoes</a>
+    <a href="kids.html">Kids' Shoes</a>
+    <a href="cart.html">Shopping Cart</a>
+    <a href="signup.html">Sign Up</a>
+  </nav>
+  <div class="container">
+    <div class="main-image">
+      <img src="C:\Users\abbaz\OneDrive\Documents\CSC 456\csc 456 project\shoe for project.webp" alt="Shoe Shop">
+    </div>
+    <div class="content">
+      <p>Welcome to our shoe shop! We offer a wide range of stylish and comfortable shoes for men, women, and kids. Explore our collection and find your perfect pair today!</p>
+    </div>
+  </div>
+</body>
+</html>

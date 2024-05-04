@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  h1 {
+    text-align: center;
+    margin-top: 50px;
+  }
+  .dropdown {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .dropdown select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  .cart-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .cart-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+  }
+  .cart-item img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Shopping Cart</h1>
+  </header>
+  <div class="container">
+    <div class="dropdown">
+      <select onchange="location = this.value;">
+        <option value="">Select Category</option>
+        <option value="index.html">Home</option>
+        <option value="mens.html">Men's Shoes</option>
+        <option value="womens.html">Women's Shoes</option>
+        <option value="kids.html">Kids' Shoes</option>
+        <option value="signup.html">Sign Up</option>
+      </select>
+    </div>
+    <div class="cart-items">
+      <!-- JavaScript will dynamically add cart items here -->
+    </div>
+    <p>Total: $<span id="totalPrice">0</span></p>
+    <button class="cart-btn" onclick="checkout()">Checkout</button>
+  </div>
+  <script>
+    // Function to add item to cart
+    function addToCart(name, price) {
+      let imgSrc;
+
+      // Determine image source based on the item name
+      switch (name) {
+        case "Kids' Shoe 1":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\kids shoe 1.jpeg";
+          break;
+        case "Kids' Shoe 2":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\kid shoe 2.jpeg";
+          break;
+        case "Kids' Shoe 3":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\kid shoe 3.jpeg";
+          break;
+        case "Women's Shoe 1":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\women shoe 1.jpeg";
+          break;
+        case "Women's Shoe 2":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\women shoe 2.jpeg";
+          break;
+        case "Women's Shoe 3":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\women shoe 3.jpeg";
+          break;
+        case "Men's Shoe 1":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\men shoe 1.jpeg";
+          break;
+        case "Men's Shoe 2":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\men shoe 2.jpeg";
+          break;
+        case "Men's Shoe 3":
+          imgSrc = "C:\\Users\\abbaz\\OneDrive\\Documents\\CSC 456\\csc 456 project\\men shoe 3.jpeg";
+          break;
+        default:
+          imgSrc = ""; // Provide a default image source if necessary
+      }
+
+      let item = {
+        name: name,
+        price: price,
+        imgSrc: imgSrc
+      };
+
+      // Retrieve cart items from local storage
+      let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Add item to cart
+      cartItems.push(item);
+
+      // Save updated cart to local storage
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+
+      // Refresh cart display
+      displayCartItems();
+    }
+
+    // Function to remove an item from the cart
+    function removeFromCart(index) {
+      // Retrieve cart items from local storage
+      let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Remove item from cart
+      cartItems.splice(index, 1);
+
+      // Save updated cart to local storage
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+
+      // Refresh cart display
+      displayCartItems();
+    }
+
+    // Function to display cart items
+    function displayCartItems() {
+      // Clear the existing cart items
+      let cartItemsContainer = document.querySelector('.cart-items');
+      cartItemsContainer.innerHTML = '';
+
+      // Reset total price
+      let totalPrice = 0;
+
+      // Retrieve cart items from local storage
+      let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Loop through cart items and generate HTML for each item
+      cartItems.forEach(function(item, index) {
+        let itemElement = document.createElement('div');
+        itemElement.classList.add('cart-item');
+
+        // Create image element
+        let imgElement = document.createElement('img');
+        imgElement.src = item.imgSrc;
+        imgElement.alt = item.name;
+        imgElement.classList.add('cart-item-img');
+        itemElement.appendChild(imgElement);
+
+        // Create item name element
+        let itemNameElement = document.createElement('p');
+        itemNameElement.textContent = 'Item Name: ' + item.name;
+        itemElement.appendChild(itemNameElement);
+
+        // Create price element
+        let priceElement = document.createElement('p');
+        priceElement.textContent = 'Price: $' + item.price;
+        itemElement.appendChild(priceElement);
+
+        // Create remove button
+        let removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function() {
+          removeFromCart(index);
+        };
+        itemElement.appendChild(removeButton);
+
+        // Add item element to cart items container
+        cartItemsContainer.appendChild(itemElement);
+
+        // Calculate total price
+        totalPrice += item.price;
+      });
+
+      // Display total price
+      let totalPriceElement = document.getElementById('totalPrice');
+      totalPriceElement.textContent = totalPrice.toFixed(2);
+    }
+
+    // Display initial cart items
+    displayCartItems();
+
+    // Function to handle checkout button click
+    function checkout() {
+      // Add your checkout logic here
+      alert('Checkout button clicked!');
+    }
+  </script>
+</body>
+</html>
